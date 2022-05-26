@@ -1,7 +1,6 @@
 package MainPAge;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Random;
 public class MainPage extends JFrame {
     private JPanel mainPanel;
     private JLabel kataLabel;
-    private JTextField textField1;
+    private JTextField textField;
     private JButton options;
     private JLabel errorDeclare;
     private JButton startButton;
@@ -60,10 +59,10 @@ public class MainPage extends JFrame {
         this.setContentPane(mainPanel);
         this.pack();
 
-        textField1.addKeyListener(new KeyAdapter() {
+        textField.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char currentChar = e.getKeyChar();
-                int currentCharIndex = textField1.getText().length(); //position is after length-1
+                int currentCharIndex = textField.getText().length(); //position is after length-1
 
                 String correctWord = HashRef.get(Katakana);
                 if (currentCharIndex >= correctWord.length()) //escape if index is out of bounds
@@ -77,12 +76,12 @@ public class MainPage extends JFrame {
                     return;
 
                 e.consume(); //cancels event
-                textField1.setText(""); //clears field
+                textField.setText(""); //clears field
                 randomize(); //randomizes character
             }
         });
 
-        textField1.addActionListener(new ActionListener() {
+        textField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                boolean ISCorrect = false;
@@ -114,9 +113,9 @@ public class MainPage extends JFrame {
         });
         startButton.addActionListener(e -> {
             try{
-                textField1.setEditable(true);
-                textField1.requestFocus();
-                textField1.setCaretPosition(0);
+                textField.setEditable(true);
+                textField.requestFocus();
+                textField.setCaretPosition(0);
 
                 randomize();
             }
@@ -129,11 +128,11 @@ public class MainPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 kataLabel.setText("Press Start to Begin");
-                textField1.setText("");
-                textField1.setEditable(false);
+                textField.setText("");
+                textField.setEditable(false);
             }
         });
-        textField1.addKeyListener(new KeyAdapter() {
+        textField.addKeyListener(new KeyAdapter() {
         });
     }
     public static void main(String[] args){
